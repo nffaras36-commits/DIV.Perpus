@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divisi Perpustakaan - SD Al Basyir</title>
+<!-- Tailwind CSS with Forms and Container Queries Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Typography & Icon Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style id="pageStyle">
+@page { size: A4 portrait; margin: 12mm; }
+</style>
+
+<style>
+body { font-family: 'Quicksand', 'Plus Jakarta Sans', sans-serif; }
+.acc { transition: opacity .35s ease-in-out; overflow: hidden; }
+.acc.collapsed { display: none; opacity: 0; }
+.acc.expanded { display: block; opacity: 1; }
+.bubble { position: absolute; border-radius: 9999px; pointer-events: none; z-index: 0; }
+
+/* Print Mode Rules */
+@media print {
+  header, main, footer, .bubble { display: none !important; }
+  body { background: #fff !important; }
+  #printModal { position: static !important; background: none !important; display: block !important; padding: 0 !important; }
+  #printArea { position: absolute; left: 0; top: 0; width: 100%; max-width: none !important; min-height: 0 !important; margin: 0; padding: 0; box-shadow: none; border: 0; }
+}
+</style>
+
+<style type="text/tailwindcss">
+.inp {@apply w-full text-xs font-semibold bg-white border-2 border-cyan-100 rounded-2xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-200}
+.inp-p {@apply border-purple-100 focus:border-purple-500 focus:ring-purple-200}
+.lbl {@apply block text-xs font-extrabold text-slate-700 mb-1}
+.stat {@apply bg-white/90 p-5 rounded-3xl border-2 flex items-center space-x-4 hover:-translate-y-1 transition duration-200}
+.ico {@apply w-14 h-14 rounded-2xl text-white flex items-center justify-center text-2xl shadow-md}
+.sta-l {@apply text-xs font-bold text-slate-400 uppercase tracking-wide}
+.btn-p {@apply px-4 py-2.5 bg-gradient-to-r from-purple-700 to-purple-500 hover:from-purple-800 text-white rounded-full text-xs font-black flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition}
+.btn-o {@apply px-4 py-2.5 bg-white text-purple-700 border-2 border-purple-300 rounded-full text-xs font-black flex items-center justify-center gap-1.5 hover:border-purple-600 active:scale-95 transition}
+.acc-head {@apply px-6 py-5 flex items-center justify-between cursor-pointer transition}
+.num {@apply w-12 h-12 rounded-2xl text-white flex items-center justify-center font-black text-lg shadow-md}
+.tog {@apply px-4 py-2 rounded-full border-2 text-xs font-extrabold bg-white flex items-center gap-2 active:scale-95 transition}
+.th {@apply py-3.5 px-4}
+.del {@apply w-8 h-8 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-500 hover:text-rose-700 flex items-center justify-center transition active:scale-95 mx-auto}
+.pth {@apply border border-slate-400 py-2 px-3}
+</style>
+</head>
+<body class="bg-gradient-to-b from-[#e0f7fa] via-[#e8f4fc] to-[#f3e8ff] text-slate-800 min-h-screen flex flex-col relative overflow-x-hidden">
+
+<!-- Decorative Background Ambient Bubbles -->
+<div class="bubble w-28 h-28 bg-[#ffd166]/40 top-6 left-10 blur-sm"></div>
+<div class="bubble w-36 h-36 bg-[#8e44ad]/15 top-12 right-12 blur-md"></div>
+<div class="bubble w-20 h-20 bg-[#26c6da]/35 top-[40%] right-8"></div>
+<div class="bubble w-12 h-12 bg-[#ffd166]/50 top-[65%] left-6"></div>
+
+<!-- HEADER NAVIGATION -->
+<header class="bg-white/85 backdrop-blur-md border-b border-teal-100 sticky top-0 z-30 shadow-lg">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <div class="flex items-center space-x-4">
+   <div class="h-14 w-14 rounded-2xl bg-gradient-to-tr from-sky-100 to-pink-50 border-2 border-cyan-300/50 flex items-center justify-center p-1.5 shadow-md hover:scale-105 transition">
+    <img alt="Logo SD Al Basyir" class="max-h-full max-w-full object-contain" id="logoImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhrERfM87tObUts2VVq-Qbe2diJTihbXGBGZzh2KPN08HV4dVd23DAYo2ThgQt9y2aRy8CJY1yR76NgMbAWo95GR5jnYGfnrZCgnseqe_IUuf2m2AP0Yeg6zBhxWz6cCot1_BsCvL3g9a1dNsMPKWd_kkVwJN7WXieOx8Jm2dJfkHlpjBdPjx0CBvzetGD0sAnCiosG_Zebf-TX5dRc7iBlDcfbIyUzAlhKU9tGNCXHGTChREy_L6aK" onerror="this.style.display='none'">
+   </div>
+   <div>
+    <div class="flex items-center gap-2">
+     <span class="text-[11px] font-extrabold uppercase tracking-wider px-3 py-0.5 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-white">DIV. Perpustakaan</span>
+     <span class="text-xs font-bold text-purple-700 bg-purple-100/70 px-2.5 py-0.5 rounded-full">TA 2026/2027</span>
+    </div>
+    <h1 class="text-xl font-black text-[#1a2e7b] mt-0.5 flex items-center gap-1.5">SD AL BASYIR <span class="w-2 h-2 rounded-full bg-[#ffd166] animate-pulse"></span></h1>
+   </div>
+  </div>
+  <div class="hidden sm:flex items-center space-x-3 bg-gradient-to-r from-cyan-50 via-purple-50 to-pink-50 pl-3.5 pr-4 py-2 rounded-full border-2 border-white shadow-md">
+   <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-700 to-rose-400 flex items-center justify-center text-white font-extrabold text-sm">FN</div>
+   <div>
+    <div class="text-[11px] text-purple-700 font-bold leading-none mb-1"><i class="fa-solid fa-star text-[10px] text-[#ffd166]"></i> Kepala / Staf Perpustakaan</div>
+    <div class="text-sm font-black text-slate-800">Farasita Nurmahfudzah, S.Hum., Gr.</div>
+   </div>
+  </div>
+ </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 relative z-10">
+
+ <!-- STATS CARDS -->
+ <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="stat border-cyan-100">
+    <div class="ico bg-gradient-to-br from-cyan-400 to-sky-500"><i class="fa-solid fa-users"></i></div>
+    <div><div class="sta-l">Kunjungan Hari Ini</div><div class="text-2xl font-black text-[#1a2e7b]" id="statToday">0 Siswa</div></div>
+  </div>
+  <div class="stat border-emerald-100">
+    <div class="ico bg-gradient-to-br from-emerald-500 to-emerald-300"><i class="fa-solid fa-user-check"></i></div>
+    <div><div class="sta-l">Status Hadir (Hari Ini)</div><div class="text-2xl font-black text-emerald-600" id="statPresent">0 Siswa</div></div>
+  </div>
+  <div class="stat border-amber-100">
+    <div class="ico bg-gradient-to-br from-[#ffd166] to-amber-500"><i class="fa-solid fa-boxes-stacked"></i></div>
+    <div><div class="sta-l">Total Aset / Inventaris</div><div class="text-2xl font-black text-amber-700" id="statItems">0 Jenis</div></div>
+  </div>
+  <div class="stat border-purple-100 justify-between">
+   <div><div class="sta-l">Dokumentasi Kegiatan</div><div class="text-sm font-black text-purple-700">Folder G-Drive</div></div>
+   <a class="btn-p" href="https://drive.google.com/drive/folders/1x9htrwbfRa6OvPnz5ffIdTIWyHT4cQSv" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-google-drive"></i><span>Buka Drive</span></a>
+  </div>
+ </div>
+
+ <!-- INFORMATION BAR -->
+ <div class="bg-gradient-to-r from-[#e0f7fa] via-[#ede9fe] to-[#fce7f3] border-2 border-white rounded-2xl p-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-700 shadow">
+  <div class="flex items-center gap-3">
+   <span class="w-8 h-8 rounded-full bg-[#26c6da] text-white flex items-center justify-center text-sm"><i class="fa-solid fa-info"></i></span>
+   <span class="font-medium"><strong>Akordeon Otomatis:</strong> hanya satu tabel terbuka dalam satu waktu. Data tersimpan otomatis di peramban ini.</span>
+  </div>
+  <button class="px-3.5 py-1 bg-white hover:bg-slate-50 text-purple-700 font-extrabold rounded-full border border-purple-200 active:scale-95" onclick="toggleAcc(null)">Tutup Semua</button>
+ </div>
+
+ <!-- TABEL 1: PENGUNJUNG PERPUSTAKAAN -->
+ <section class="bg-white/95 rounded-3xl border-2 border-teal-100 shadow-xl overflow-hidden">
+  <div class="acc-head hover:bg-cyan-50/60" onclick="toggleAcc('1')">
+   <div class="flex items-center space-x-4">
+    <div class="num bg-gradient-to-br from-cyan-400 to-sky-500">1</div>
+    <div>
+     <h2 class="text-base font-extrabold text-[#1a2e7b]">TABEL 1: Pengunjung Perpustakaan</h2>
+     <p class="text-xs text-slate-500 font-medium">Absensi kunjungan dengan pilihan nama siswa otomatis sesuai kelas</p>
+    </div>
+   </div>
+   <button type="button" class="tog border-cyan-200 text-sky-700 hover:bg-cyan-50" onclick="event.stopPropagation();toggleAcc('1')"><span id="l1">Buka / Perbesar</span><i class="fa-solid fa-chevron-down text-xs transition-transform" id="i1"></i></button>
+  </div>
+  <div class="acc collapsed border-t-2 border-cyan-100" id="c1">
+   <div class="p-6 space-y-6">
+    <div class="bg-gradient-to-br from-teal-50 via-cyan-50 to-violet-100 p-6 rounded-3xl border-2 border-white shadow">
+     <h3 class="text-sm font-black text-[#1a2e7b] mb-4"><i class="fa-solid fa-user-plus text-cyan-500 mr-2"></i>Tambahkan Kunjungan Siswa/wi Baru</h3>
+     <form class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end" onsubmit="addVisitor(event)">
+      <div class="md:col-span-2"><label class="lbl">Tanggal</label><input class="inp" id="inDate" type="date"></div>
+      <div class="md:col-span-2"><label class="lbl">Pilih Kelas</label><select class="inp" id="selClass" onchange="fillStudents()"></select></div>
+      <div class="md:col-span-3"><label class="lbl">Nama Lengkap (Otomatis)</label><select class="inp" id="selStudent"><option value="">-- Pilih kelas terlebih dahulu --</option></select></div>
+      <div class="md:col-span-2"><label class="lbl">Status Kehadiran</label><select class="inp" id="selStatus"><option>Hadir</option><option>Tidak Hadir</option></select></div>
+      <div class="md:col-span-2"><label class="lbl">Link Drive (Opsional)</label><input class="inp truncate" id="inDrive" type="text" placeholder="Link G-Drive kegiatan"></div>
+      <div class="md:col-span-1"><button class="btn-p w-full" type="submit"><i class="fa-solid fa-plus"></i>Simpan</button></div>
+     </form>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-cyan-50/50 p-3 rounded-2xl border border-cyan-100">
+     <div class="flex flex-wrap items-center gap-2 text-xs font-bold text-slate-600">
+      <span>Filter Kelas:</span><select class="text-xs bg-white border-2 border-cyan-100 rounded-xl px-3 py-1.5 font-bold" id="fClass" onchange="renderVisitors()"></select>
+      <span>Cari Nama:</span><input class="text-xs bg-white border-2 border-cyan-100 rounded-xl px-3 py-1.5 font-semibold" id="fSearch" placeholder="Ketik nama..." oninput="renderVisitors()">
+     </div>
+     <span class="bg-gradient-to-r from-cyan-100 to-teal-100 text-teal-800 px-3.5 py-1 rounded-full font-black border border-teal-200 text-xs" id="visBadge">0 Kunjungan</span>
+    </div>
+
+    <div class="overflow-x-auto rounded-3xl border-2 border-teal-100 bg-white">
+     <table class="w-full text-left text-xs">
+      <thead><tr class="bg-gradient-to-r from-cyan-50 to-violet-100 text-[#1a2e7b] font-black uppercase tracking-wider border-b-2 border-teal-100">
+       <th class="th w-12 text-center">No</th><th class="th">Tanggal</th><th class="th">Nama Lengkap Siswa</th><th class="th">Kelas</th><th class="th text-center">Status</th><th class="th">Dokumentasi</th><th class="th text-center">Aksi</th>
+      </tr></thead>
+      <tbody class="divide-y divide-teal-50" id="visBody"></tbody>
+     </table>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- TABEL 2: INVENTARISASI BARANG & CETAK LAPORAN -->
+ <section class="bg-white/95 rounded-3xl border-2 border-purple-100 shadow-xl overflow-hidden">
+  <div class="acc-head hover:bg-purple-50/60" onclick="toggleAcc('2')">
+   <div class="flex items-center space-x-4">
+    <div class="num bg-gradient-to-br from-purple-700 to-purple-400">2</div>
+    <div>
+     <h2 class="text-base font-extrabold text-[#1a2e7b]">TABEL 2: Inventarisasi Barang &amp; Cetak Laporan</h2>
+     <p class="text-xs text-slate-500 font-medium">Kelola barang perpustakaan serta unduh/cetak laporan resmi (DOC/PDF, A4/F4)</p>
+    </div>
+   </div>
+   <button type="button" class="tog border-purple-200 text-purple-700 hover:bg-purple-50" onclick="event.stopPropagation();toggleAcc('2')"><span id="l2">Buka / Perbesar</span><i class="fa-solid fa-chevron-down text-xs transition-transform" id="i2"></i></button>
+  </div>
+  <div class="acc collapsed border-t-2 border-purple-100" id="c2">
+   <div class="p-6 space-y-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+     <div class="lg:col-span-7 bg-gradient-to-br from-white to-purple-50 p-6 rounded-3xl border-2 border-purple-100">
+      <h3 class="text-sm font-black text-[#1a2e7b] mb-4"><i class="fa-solid fa-cart-flatbed text-purple-600 mr-2"></i>Pencatatan Barang Perpustakaan</h3>
+      <form class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end" onsubmit="addItem(event)">
+       <div class="sm:col-span-5"><label class="lbl">1. Nama Barang</label><input class="inp inp-p" id="inName" placeholder="Contoh: Ensiklopedia Sains" required></div>
+       <div class="sm:col-span-3"><label class="lbl">2. Jumlah</label><input class="inp inp-p" id="inQty" type="number" min="1" value="1" required></div>
+       <div class="sm:col-span-4"><label class="lbl">3. Kondisi Barang</label>
+        <select class="inp inp-p" id="inCond"><option>Sangat Baik</option><option>Baik / Layak</option><option>Perlu Perbaikan</option><option>Rusak Ringan</option></select></div>
+       <div class="sm:col-span-12 flex justify-end pt-2"><button class="btn-p" type="submit"><i class="fa-solid fa-plus"></i>Tambahkan Barang</button></div>
+      </form>
+     </div>
+     <div class="lg:col-span-5 bg-gradient-to-br from-purple-100 via-cyan-50 to-pink-100 p-6 rounded-3xl border-2 border-white shadow flex flex-col justify-between gap-3">
+      <div>
+       <h3 class="text-sm font-black text-[#1a2e7b] mb-2"><i class="fa-solid fa-print text-purple-600 mr-2"></i>4. Cetak &amp; Unduh Laporan</h3>
+       <p class="text-xs text-slate-600 mb-3 font-medium">Format DOC/PDF dengan kop SD Al Basyir, bertajuk <strong>LAPORAN DIV. Kemuridan</strong> (tanggal, nama lengkap, kelas, status).</p>
+       <div class="grid grid-cols-2 gap-3">
+        <div><label class="lbl">Ukuran Kertas</label><select class="inp inp-p" id="paperSize" onchange="updatePrint()"><option value="A4">A4 (210 x 297 mm)</option><option value="F4">F4 / Folio (215 x 330 mm)</option></select></div>
+        <div><label class="lbl">Orientasi</label><select class="inp inp-p" id="paperOri" onchange="updatePrint()"><option value="portrait">Potret</option><option value="landscape">Lanskap</option></select></div>
+       </div>
+      </div>
+      <div class="flex gap-2">
+       <button class="btn-p flex-1" onclick="openPrint()"><i class="fa-solid fa-file-pdf"></i>Pratinjau &amp; Cetak PDF</button>
+       <button class="btn-o flex-1" onclick="downloadDoc()"><i class="fa-solid fa-file-word text-sky-500"></i>Download DOC</button>
+      </div>
+     </div>
+    </div>
+
+    <div class="space-y-3">
+     <div class="flex items-center justify-between">
+      <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Daftar Barang &amp; Perlengkapan</h4>
+      <span class="text-xs text-purple-700 font-black bg-purple-100 px-3.5 py-1 rounded-full border border-purple-200" id="itemBadge">0 Item</span>
+     </div>
+     <div class="overflow-x-auto rounded-3xl border-2 border-purple-100 bg-white">
+      <table class="w-full text-left text-xs">
+       <thead><tr class="bg-gradient-to-r from-violet-100 to-pink-100 text-[#1a2e7b] font-black uppercase tracking-wider border-b-2 border-purple-100">
+        <th class="th w-12 text-center">No</th><th class="th">Nama Barang</th><th class="th text-center">Jumlah</th><th class="th text-center">Kondisi</th><th class="th">Diperbarui</th><th class="th text-center">Aksi</th>
+       </tr></thead>
+       <tbody class="divide-y divide-purple-50" id="itemBody"></tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+  </div>
+ </section>
+</main>
+
+<!-- MODAL CETAK & PRATINJAU -->
+<div class="fixed inset-0 z-50 bg-slate-900/60 hidden items-center justify-center p-4" id="printModal">
+ <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden border-2 border-teal-100">
+  <div class="px-6 py-4 border-b border-teal-100 flex items-center justify-between bg-gradient-to-r from-teal-50 via-purple-50 to-pink-50">
+   <div><h3 class="text-sm font-black text-slate-800">Pratinjau Cetak: LAPORAN DIV. Kemuridan</h3>
+    <p class="text-[11px] text-slate-500 font-medium">Pilih "Simpan sebagai PDF" pada dialog cetak untuk mengunduh PDF</p></div>
+   <div class="flex items-center gap-2">
+    <button class="btn-p" onclick="window.print()"><i class="fa-solid fa-print"></i>Cetak / Simpan PDF</button>
+    <button class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-600 flex items-center justify-center" onclick="closePrint()"><i class="fa-solid fa-xmark"></i></button>
+   </div>
+  </div>
+  <div class="p-6 overflow-auto flex-grow bg-slate-100 flex justify-center">
+   <div class="bg-white shadow-md p-8 w-full text-slate-900 text-xs border border-slate-200" id="printArea" style="max-width:210mm;min-height:297mm">
+    <div class="flex items-center justify-between border-b-2 border-slate-800 pb-4 mb-6">
+     <div class="w-20 h-20 flex-shrink-0 flex items-center justify-center"><img alt="Logo" class="max-h-full max-w-full object-contain" id="logoPrint" onerror="this.style.display='none'"></div>
+     <div class="text-center flex-grow px-4">
+      <h2 class="text-base font-extrabold tracking-wide uppercase">ASRAMA PENDIDIKAN WALADAN SOLIHAN</h2>
+      <h1 class="text-lg font-black tracking-wider text-[#1a2e7b] uppercase">SD AL BASYIR</h1>
+      <p class="text-[10px] text-slate-600 font-medium leading-relaxed">Jl. Cikopo Selatan, Sukamahi, Kec. Megamendung, Kabupaten Bogor, Jawa Barat 16770<br>Tahun Ajaran 2026/2027 • Layanan Sistem Informasi Terpadu</p>
+     </div>
+     <div class="w-20 text-right text-[9px] text-slate-400 font-mono">FORM-KMR<br>REV. 2026</div>
+    </div>
+    <div class="text-center mb-6">
+     <h3 class="text-sm font-black uppercase underline underline-offset-4">LAPORAN DIV. KEMURIDAN</h3>
+     <p class="text-[11px] text-slate-600 mt-1">Rekapitulasi Kunjungan Perpustakaan &amp; Status Kehadiran Siswa</p>
+     <div class="mt-2 inline-flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] bg-slate-50 px-3 py-1 rounded-md border border-slate-200 font-medium">
+      <span><strong>Tanggal Cetak:</strong> <span id="pDate"></span></span>
+      <span><strong>Kertas:</strong> <span id="pFormat"></span></span>
+      <span><strong>Penanggung Jawab:</strong> Farasita Nurmahfudzah, S.Hum., Gr.</span>
+     </div>
+    </div>
+    <table class="w-full border-collapse border border-slate-400 text-[11px] mb-6">
+     <thead><tr class="bg-slate-100 font-bold text-center">
+      <th class="pth w-10">No</th><th class="pth w-28">Tanggal</th><th class="pth text-left">Nama Lengkap Siswa</th><th class="pth w-20">Kelas</th><th class="pth w-28">Status Siswa/wi</th><th class="pth w-36">Keterangan</th>
+     </tr></thead>
+     <tbody id="pBody"></tbody>
+    </table>
+    <div class="mb-8 p-3 rounded-lg border border-slate-300 bg-slate-50 text-[10px]">
+     <div class="font-bold text-slate-700 uppercase mb-1">Catatan Divisi Perpustakaan:</div>
+     <p class="text-slate-600" id="pNote"></p>
+    </div>
+    <div class="grid grid-cols-2 gap-8 text-center text-[11px] mt-12 pt-4" style="break-inside:avoid">
+     <div><p class="text-slate-500 mb-16">Mengetahui,<br><strong>Kepala Sekolah SD Al Basyir</strong></p>
+      <p class="font-bold underline">( ............................................ )</p><p class="text-[10px] text-slate-500">NIP. ........................................</p></div>
+     <div><p class="text-slate-500 mb-16">Bogor, <span id="pSign"></span><br><strong>Divisi Perpustakaan</strong></p>
+      <p class="font-bold underline">Farasita Nurmahfudzah, S.Hum., Gr.</p><p class="text-[10px] text-slate-500">Staf Penanggung Jawab Perpustakaan</p></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-white/80 border-t border-teal-100 mt-12 py-5 text-xs text-slate-500 relative z-10">
+ <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+  <div><span class="font-black text-[#1a2e7b]">SD AL BASYIR</span> • <span class="font-bold text-cyan-500">Sistem Informasi Divisi Perpustakaan</span></div>
+  <div>Petugas: <strong class="text-purple-700">Farasita Nurmahfudzah, S.Hum., Gr.</strong></div>
+ </div>
+</footer>
+
+<!-- SCRIPT LOGIC -->
+<script>
+const DRIVE = "https://drive.google.com/drive/folders/1x9htrwbfRa6OvPnz5ffIdTIWyHT4cQSv";
+
+// Full Roster Master Data per Class
+const RAW = {
+"1.A":`Abdul Rasyid Jumadil Amin Dawolo|Abhinaya Nala Aksara|Amara Zaina Mahira|Arshaka Asraf Ekayanto|Azura Mafaza|Faiq Zulfan|Ghania Diandra Pramesti|Hanif Nur Fadillah|Muhammad Alzaedan Faeyza|Muhammad Zaky Iskandar|Muhammad Al Khawarizmi|Muhammad Hafiz Al Ghifari|Muhammad Salman Fadliyah|Nayra Salwa Shanum|Nazla Elkhaira Basri|Rara Rumaisha Prisca Dian|Rasyidatul Marwah|Sheena Putri Altaz|Zidan Ihsan Alfarizi`,
+"1.B":`Arcello Edgar Rasya|Azamir|Diana Siti Nurfaridah|Emier Malik Hidayat|Fhatian Attirmidzi|Abidzar Dzikri Alhanansyah|Kayla Nadhifa Almahira|Khayri Alfaik Muhamad|Maezura Maulida Arroya|Muhamad Zidni Ilmam|Muhammad Irsyad Al-Fatih|Muhammad Reza Mangkubumi|Putri Cakira|Qisthie Tasbiha Qonita|Sayyid Al Fariz|Shana Nathania Devrian|Zayna Yumna Pahlevi`,
+"1.C":`Ahza Luanna Almashyra Ag|Banafsha Nuha Zahira|Clemira Shanum Nasyauqi|Edelweiss Arrofi|Elvia Maisara Zian|Hafizah Naysilla Rahmah|Hisham Sukma Hamizan|Kalandra Awaiz Attar Abqary|Kanaka Ibrahim Elqiano|Hilya Mafaza Rizki|Merdik Miraj Priyanto|Muhammad Aditya Pradipta Rahman|Muhammad Rayyan Dzakki Setiawan|Muhammad Zhafran Setiawan|Qiandra Azqiara Shafina Afsheera|Rahsya Syarif Atallah|Rasendriya Athaya Hermawan|Razza Raffasya Gaishan`,
+"1.D":`Adib Manarul Mumtaz|Ahmad Fauzi|Aliya Maulida Yusuf|Azkia Nursyifa Hibatillah|Moh. Alen Sidqi|Muhammad Afzer Rafif Assyafi'i|Muhammad Shaquille Mikhaeel|Muhammad Yusuf Taqiy|Nabila Ayudhia Syahidah|Naffa Ramadaniyati|Ratu Nazwa Qurota Aeni|Raudhah Khirani Siti Aisha|Shadeeqa Hanania Maulida|Shaghf Qavy Alaraj|Sheina Ratu Qisthina|Syamil Abdul Hakam|Yusuf Ali Jaber|Zunaira Arsyila Kirana`,
+"2.A":`Arsy Aulia Ramadhani|Ahmad Muzakki Alhafizh|Aqila Misha Shafana|Aqmar Raffasya Rohmatul|Arka Akmal Serkan|Daffa Alfarisqy|Gefira Nidya Putri Al-Muhida|Hamid Muhammad Handris|Hana Syafiatun Nisa|Mikhayla Ameera Ramadhani|Muhammad Al Bakhith|Muhammad Alif Attaqi|Muhammad Nafis Syauqi|Muhammad Nazran Alfiraz|Muhamnad Al Hafidzh|Pingka Deona Lubna Yazytka|Qalesya Rania Humaira|Raisha Azzahra|Renjana Khairina Astagini|Shofhatul Hidayah Bulqeny|Zhafran Syafiq Ubaidillah|Zella Athirah Akhyana`,
+"2.B":`Ahmad Ikramul Muharram|Achmad Fattah Fachrudin|Alesha Khumaira Fitrah|Alisya Queen Affandi|Annasya Malika Indira Giri|Ansara Nafeesa Noor Z|Ashley Murad|Asyraf Drajat Ramlan|Azka Ilyasa Ramadhan|Febrian Habibi Rohman|Hifzi Tazkiyatussaadah|Ilyas Ali Putra Bakhtiar|Kirana Almayra Jamilah|Muhammad Azril Ar Rasyid|Muhammad Bondan Attaqi|Muhammad Daram Alfatih|Muhammad Hikam Annizami|Muhammad Sulthon Wildan|Muhammad Zhafran Al-Qarni|Nadhira Awal Felisha|Siti Mariah Ulfah`,
+"2.C":`Abdullah Omar Al Ghazali|Aisyah Qurrotu'ain|Arsyila Mulidya|Azkia Karima|Azkiya Sayyidatu Tsani Iskandar|Giras Al Ghifari|Geza Mikail|Hafidz Abid Al Rabbani|Mahreen Shafana|Milka Rubina|Mochammad Revan Arkananta|Muhammad Adrian Akmal|Muhammad Arisqi Saputra|Muhammad Dzafir Al Ausy|Muhammad Khabib Al Fatih|Muhammad Nabil Hidayah|Muhammad Shakel Haziq|Qalesya Almahira Putri|Rayya Anida Farzana Syafna|Shanum Zahira Izzatunnisa|Siti Azlifatuyyasna Ismail`,
+"3.A":`Asyifa Nur Aulia|Ali Nur Zaman|Aubrey Leo Eugene|Chayra Khalisa Bilqis|Dzakir Pranaja|Farhaira Pramadia Farazayna|Giandra Razka Arfabian|Kenzie Putra Hermawan|Muhammad Rezka Shiddiq Arrasy|Makayla Princee Salim|Meysha Ramaniya Mahya|Muhamad Muslim Alfatih|Muhammad Alfatih Busthomi|Muhammad Sulthan Ziqo|Muhammad Syahdan khaeroni|Muhamnad Zhafran Rafisqy|Naqiyyah Hamidah|Putri Esita Nurrohman|Resleta Shafana Ramadhani|Shiena Aurelia Andriyani|Siti Nafisatunnisa|Teuku Umar Johani|Uwais Abizar Zulkhaidah|Zainal Arifin|Zhafran Alfarezi`,
+"3.B":`Aisyah Halwa Varisha|Abdullah Dayhas|Ali Imron|Azka Rafasya|Carissa Ayu Cantika|Dihyatunnisa|Fadhil Yazid Ab-qori|Fathian Akbar Fathurrahman|Fawwaz Kanzul Madani|Ghania Hafidza|Hafizah Putri|Irfa Yarfaul Ilmi|Keysha Putri Lubis|Larista Rania|Meisya Aira|Muhammad Al Hafidzhi|Muhammad Alfatih (JKT)|Muhammad Fasni Mubarok|Muhammad Ziyad Abyan|Musthofa Atheef Al Maliki|Naura Aleesya Al Fatih|Rafif Nazril|Razka El Azzam|Siti Risyda Zakiyah|Uwais Thufail Kamil|Zaid Arsya|Zeeya Ramadhani`,
+"3.C":`Abidzar Faras Aufa|Ahmad Zulzilatul Ardhu|Arkhan Fathurrohman Alfatih|Arvin Yuan Arentino|Carissa Syamra Az Zaida|Danish Arsenio Darmudji|El rumi Arfan|Husein Ridwan|Inayatul Siregar|Izzatullah Zhafran Abqary|Khalisa Azzahra|Medina Tsurayya|Muhamad Tsaqib Rabbani|Muhammad Alfatih (Dpk)|Muhammad Arsyad|Muhammad Hamdan Al Maktoum|Muhammad Imdad Al-Maula|Muhammad Nuh Ar Rifai|Muhammad Raffa Hafiq|Mutia Sadiq|Sayyida Fatimatu Zahra M|Shanaya Lentera Nusantara|Sheena Naumi|Siti Auliatussolihah|Siti Salmah Rufaidah|Sulthan Fathir Rahman|Wisnu Permana`,
+"4.A":`Ahmad Rifai Arif|Alkhalifidhia Permana|Alzam Faiz Artanabil|Asyrof Fawwaz Muzhaffar|Dzakira Hibbatillah|Fadhilah Uwais Al Qorni|Farrel Abqari Runako|Haliza Khairoh Irawan|Hanzola Pramesyah|Inara Afsheen Adiva|Kanaya Putri|Mariah Syifa Aurel Khafizah|Muhammad Abdul Qadir Al Khoiry|Muhammad Adlan Faisal|Muhammad Fatir Putra Soni|Muhammad Iqbal|Muhammad Rasya Maulana putra|Muhammad Arsyil Hidayah|Ruqayah Ainun Naqqiyah|Siti Fatimah Zahrotunnisa|Siti Rohmah|Sylviana Putri|Zaid Hartanto Sastra Dinata`,
+"4.B":`Ahmad Haikal Marzuki|Arsyila Zainatusyita|Ayesha Murad|Azkiya Putri|Dhafitha Ayska Fathiya|Febian Nizam Saksono|Maulana Yusuf|Muhammad Faresi Utsmani|Muhammad Maulana Malik Ibrahim|Muhammad Pratama Rendi|Muhammad Syauqi Shofiyurrah|Muhammad Zulmi Aydin|Nabila Putri Syafna|Pradiva Septiana Nur Sobari|Rafasyah Habibi Takwa|Rafiq Ahmad|Raihan El Shaarawy Fadhil|Muhammad Sahil Salman|Sholihatunnajah Ikrillah|Sigit Sultan Nugraha|Sulthan Kenzie Mahendra|Syarifah Nafisah|Tufcelia Salsabila`,
+"5.A":`Aisyah Al Aliyah Siregar|Akhdan Latif|Aldiana|Alilatul Bariza|Alvaro Hadi Prasetyo|Arifah Nawawi|Asya Kaila|Azizi Athola Munjani|Azka Al Gibran|Dani Ihsan Firdaus|Erdiansyah Putra Ramadhan|Gendis Aghnya|Gibran Arifandi Matori|Kailan Nazila|M. Zein Albiyan|Muhammad Arfa Firaz Al Falah|Muhammad Gusma Nailurroja|Muhmmad Kahfi Al - Ghifari|Rafardhan Athaillah Akmal|Ummar Ridwan Al Amry`,
+"5.B":`Abyzar Fazza Putra Saroni|Adlina Madaniah Abbasy|Arkan Faiq Arroyan Saluth S|Bintang Rasyid Fauzi|Cintya Rizqi Azzallia|Dafa Ibnu Hafiz|Dzubyan Syakir Abdillah|Faeyza Zaidantsaqif Zulyadi|Habil Adzikra Syafaaturizki|Hamdan Mustofa|Khadijah Aulia Hakim|Muhammad Gibran Akbar Bursani|Muhammad Yuda Septian|Muhammad Aizar Ismail|Muhammad Mujahidin Filllah|Muhammad Sabeni Abdul Azhim|Rasheeqa Ainayya Maulida|Syafieq Al Sabana Putra Ferdian|Syavika Khaira`,
+"5.C":`Adiba Adzka Baluqia|Adli Makarim Abbasy|Aira Thalita Zahran|Al Fatih Aulia Sudrajat|Ali Akbar Habibullah|Cahaya Salsabila|El Rubin Junior Syahdiram|Ibnu Sina Rahman Thaha|Mahar Dhika Yusuf Pratama|Muhaammad Gerriy Ibrahim|Muhamad Yuka|Muhammad Dika Saputra|Muhammad Fawwaz Al Musyafa|Muhamad Rafa Fauzan Kamil|Raisa Audia Inara|Rasyiqul Safaras Hanif|Sindi Septiani Putri|Syakira Mafaza Munawar|Ziyan M Athoilah|Zaila Nuha Ufairah`,
+"6.A":`Abu Dzar Al Ghifari|Aila Java Ramlan|Ajeng Kartika Marwah|Alfath Hameedillah Saury|Ali Saifullah Sahal|Arsen Alfatih Zehansyah|Dhia Syarafana Itsnaini Arief|Dzakira Latifa Az'zahra|Dzakiyya Zaafarani Siregar|Dzaky Bilfaqih Ahmad|Elis Safitri|Hamka Ali Mirza|Hana Nabila Hadi Irawan|Hisyam Iftikhaar|Kholilurrahman Said|M. El Ashraf Raja Umaira|Midad Dzahabi|Muhamad Syahreza Ramadhan|Muhammad Habibie Zahid|Muhammad Lutfi Hamizan|Muhammad Nur Aswendy Reifansyah|Muhammad Raziv|Muhammad Rizky Al-Fatih|Rasya Adyastha Hermawan|Rezky Dary Hanan|Saad Muhammad Syamil|Septi Ila Riana|Umay Arfiansyah`,
+"6.B":`Abdan Fawaz Zulfadli|Abdullah Syafiq Fauzul Haq Iskandar|Ahmad Hanif Azzam|Aji Khairul Anwar|Akbar Syahputra|Annisa Mumtaza Kamila|Aqilla Fariza Mufia|Arka Abiyasa Putra|Aufilana Aghniyaa Putri Nirwanto|Charissa Ayra Nurzahida|Datuk Mirza Almair|Fatih Senandung Purnomo|Khalisa Almaira Fathanah|Maulana Farid Atallah|Mirza Walid Al Zaidan|Muhamad Fadhil Nurhidayat|Muhammad Aksel Danendra|Muhammad Arjuna Nur Rasyid|Muhammad Azri Mubarok|Muhammad Faqih Khoiry Fathullah|Nadira Shaqi Nurhadi|Nijma Farihatul Husna|Raden Ahmad Suryanegara|Raza Alfairuz Kurniawan|Topan Abu Ya'la|Wildan Muzammil|Zeewan Elhaaziq`
+};
+
+const students = {}; 
+Object.keys(RAW).forEach(k => students[k] = RAW[k].split('|'));
+
+// DOM & Format Helpers
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const isoDate = d => new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+const today = () => isoDate(new Date());
+const MON = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+function fmtDate(s){ if(!s) return '-'; const p=s.split('-'); return p.length!==3 ? s : `${parseInt(p[2])} ${MON[parseInt(p[1])-1]} ${p[0]}`; }
+const safeUrl = u => /^https?:\/\//i.test(u) ? u : '';
+
+// Local Storage Wrappers
+function load(k, def){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; }catch(e){ return def; } }
+function persist(){ try{ localStorage.setItem('alb_visitors', JSON.stringify(visitors)); localStorage.setItem('alb_items', JSON.stringify(items)); }catch(e){} }
+
+const T = today();
+const seedV = [["1.A","Abdul Rasyid Jumadil Amin Dawolo","Hadir",1],["1.A","Amara Zaina Mahira","Hadir",1],["1.A","Faiq Zulfan","Tidak Hadir",0],["1.B","Diana Siti Nurfaridah","Hadir",1],["1.B","Muhammad Irsyad Al-Fatih","Hadir",0],["1.C","Clemira Shanum Nasyauqi","Hadir",1],["1.D","Ahmad Fauzi","Hadir",0],["2.A","Arsy Aulia Ramadhani","Hadir",1],["3.B","Aisyah Halwa Varisha","Hadir",0],["4.A","Farrel Abqari Runako","Hadir",1],["5.A","Gendis Aghnya","Tidak Hadir",0],["6.A","Abu Dzar Al Ghifari","Hadir",1]];
+
+let visitors = load('alb_visitors', seedV.map((v,i) => ({id:i+1, date:T, className:v[0], student:v[1], status:v[2], driveLink:v[3]?DRIVE:''})));
+let items = load('alb_items', [
+ {id:1,name:"Buku Ensiklopedia Sains & Teknologi Bergambar",qty:25,condition:"Sangat Baik",updated:T},
+ {id:2,name:"Kamus Lengkap Bahasa Arab - Indonesia Al-Munawwir",qty:15,condition:"Baik / Layak",updated:T},
+ {id:3,name:"Rak Display Majalah Anak Edukatif Kayu Jati",qty:4,condition:"Sangat Baik",updated:T},
+ {id:4,name:"Globe Bola Dunia Geografis Standar Sekolah",qty:2,condition:"Baik / Layak",updated:T},
+ {id:5,name:"Set Meja & Kursi Baca Siswa Ramah Anak",qty:12,condition:"Baik / Layak",updated:T},
+ {id:6,name:"Barcode Scanner USB Digital Perpustakaan",qty:2,condition:"Sangat Baik",updated:T}
+]);
+
+/* Accordion Controller */
+function setAcc(n, open){
+ $('c'+n).classList.toggle('expanded', open);
+ $('c'+n).classList.toggle('collapsed', !open);
+ $('i'+n).classList.toggle('rotate-180', open);
+ $('l'+n).textContent = open ? 'Tutup / Minimalis' : 'Buka / Perbesar';
+}
+
+function toggleAcc(k){
+ ['1','2'].forEach(n => setAcc(n, k === n && !$('c'+n).classList.contains('expanded')));
+}
+
+/* Page Load Initialization */
+window.addEventListener('DOMContentLoaded', () => {
+ const opts = Object.keys(students).map(c => `<option value="${c}">Kelas ${c}</option>`).join('');
+ $('selClass').innerHTML = '<option value="">-- Pilih Kelas --</option>' + opts;
+ $('fClass').innerHTML = '<option value="ALL">Semua Kelas</option>' + opts;
+ $('inDate').value = today();
+ $('inDrive').value = DRIVE;
+ $('logoPrint').src = $('logoImg').src;
+ renderVisitors(); 
+ renderItems(); 
+ stats();
+});
+
+/* Fill Student Name Dropdown Dynamically Based on Selected Class */
+function fillStudents(){
+ const c = $('selClass').value;
+ const sel = $('selStudent');
+ if(!c || !students[c]){
+  sel.innerHTML = '<option value="">-- Pilih kelas terlebih dahulu --</option>';
+  return;
+ }
+ sel.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>' + students[c].map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+}
+
+/* Visitor Management */
+function addVisitor(e){
+ e.preventDefault();
+ const date = $('inDate').value;
+ const className = $('selClass').value;
+ const student = $('selStudent').value;
+ const status = $('selStatus').value;
+ const driveLink = $('inDrive').value;
+
+ if(!date || !className || !student){
+  alert('Harap lengkapi Tanggal, Kelas, dan Nama Siswa!');
+  return;
+ }
+
+ visitors.unshift({
+  id: Date.now(),
+  date,
+  className,
+  student,
+  status,
+  driveLink: safeUrl(driveLink) || DRIVE
+ });
+ persist();
+ renderVisitors();
+ stats();
+ $('selStudent').value = '';
+}
+
+function deleteVisitor(id){
+ if(confirm('Hapus data kunjungan ini?')){
+  visitors = visitors.filter(v => v.id !== id);
+  persist();
+  renderVisitors();
+  stats();
+ }
+}
+
+function renderVisitors(){
+ const fc = $('fClass').value;
+ const fs = $('fSearch').value.toLowerCase().trim();
+
+ const list = visitors.filter(v => {
+  const matchClass = (fc === 'ALL' || v.className === fc);
+  const matchSearch = (!fs || v.student.toLowerCase().includes(fs));
+  return matchClass && matchSearch;
+ });
+
+ $('visBadge').textContent = `${list.length} Kunjungan`;
+ const tbody = $('visBody');
+ if(list.length === 0){
+  tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-400 font-medium">Belum ada data kunjungan yang sesuai.</td></tr>`;
+  return;
+ }
+
+ tbody.innerHTML = list.map((v, i) => `
+  <tr class="hover:bg-cyan-50/40 transition border-b border-teal-50">
+   <td class="th text-center font-bold text-slate-400">${i+1}</td>
+   <td class="th font-semibold whitespace-nowrap">${fmtDate(v.date)}</td>
+   <td class="th font-bold text-[#1a2e7b]">${esc(v.student)}</td>
+   <td class="th"><span class="px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-[11px] font-black">Kelas ${esc(v.className)}</span></td>
+   <td class="th text-center">
+    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black ${v.status==='Hadir'?'bg-emerald-100 text-emerald-700':'bg-rose-100 text-rose-700'}">
+     ${v.status==='Hadir'?'<i class="fa-solid fa-check mr-1"></i>Hadir':'<i class="fa-solid fa-xmark mr-1"></i>Tidak Hadir'}
+    </span>
+   </td>
+   <td class="th">
+    ${v.driveLink ? `<a href="${esc(v.driveLink)}" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:text-purple-800 font-bold flex items-center gap-1"><i class="fa-brands fa-google-drive"></i><span class="truncate max-w-[140px]">Link Drive</span></a>` : '<span class="text-slate-400">-</span>'}
+   </td>
+   <td class="th text-center">
+    <button class="del" onclick="deleteVisitor(${v.id})" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>
+   </td>
+  </tr>
+ `).join('');
+}
+
+/* Inventory Items Management */
+function addItem(e){
+ e.preventDefault();
+ const name = $('inName').value.trim();
+ const qty = parseInt($('inQty').value) || 1;
+ const condition = $('inCond').value;
+ if(!name) return;
+
+ items.unshift({
+  id: Date.now(),
+  name,
+  qty,
+  condition,
+  updated: today()
+ });
+ persist();
+ renderItems();
+ stats();
+ $('inName').value = '';
+ $('inQty').value = '1';
+}
+
+function deleteItem(id){
+ if(confirm('Hapus barang inventaris ini?')){
+  items = items.filter(it => it.id !== id);
+  persist();
+  renderItems();
+  stats();
+ }
+}
+
+function renderItems(){
+ $('itemBadge').textContent = `${items.length} Item`;
+ const tbody = $('itemBody');
+ if(items.length === 0){
+  tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400 font-medium">Belum ada barang inventaris terdaftar.</td></tr>`;
+  return;
+ }
+
+ tbody.innerHTML = items.map((it, i) => `
+  <tr class="hover:bg-purple-50/40 transition border-b border-purple-50">
+   <td class="th text-center font-bold text-slate-400">${i+1}</td>
+   <td class="th font-black text-slate-800">${esc(it.name)}</td>
+   <td class="th text-center font-black text-purple-700">${it.qty} Unit</td>
+   <td class="th text-center">
+    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${
+     it.condition === 'Sangat Baik' ? 'bg-emerald-100 text-emerald-800' :
+     it.condition === 'Baik / Layak' ? 'bg-sky-100 text-sky-800' :
+     it.condition === 'Perlu Perbaikan' ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+    }">${esc(it.condition)}</span>
+   </td>
+   <td class="th text-slate-500 font-medium">${fmtDate(it.updated)}</td>
+   <td class="th text-center">
+    <button class="del" onclick="deleteItem(${it.id})" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>
+   </td>
+  </tr>
+ `).join('');
+}
+
+/* Statistics Calculation */
+function stats(){
+ const todayVis = visitors.filter(v => v.date === today());
+ $('statToday').textContent = `${todayVis.length} Siswa`;
+ const presentCount = todayVis.filter(v => v.status === 'Hadir').length;
+ $('statPresent').textContent = `${presentCount} Siswa`;
+ $('statItems').textContent = `${items.length} Jenis`;
+}
+
+/* Print Modal & Format Updates */
+function updatePrint(){
+ const size = $('paperSize').value;
+ const ori = $('paperOri').value;
+ const styleEl = $('pageStyle');
+ if(size === 'A4'){
+  styleEl.innerHTML = `@page{size:A4 ${ori};margin:12mm}`;
+  $('printArea').style.maxWidth = ori === 'portrait' ? '210mm' : '297mm';
+  $('printArea').style.minHeight = ori === 'portrait' ? '297mm' : '210mm';
+  $('pFormat').textContent = `A4 (${ori === 'portrait' ? 'Potret' : 'Lanskap'})`;
+ } else {
+  styleEl.innerHTML = `@page{size:215mm 330mm ${ori};margin:12mm}`;
+  $('printArea').style.maxWidth = ori === 'portrait' ? '215mm' : '330mm';
+  $('printArea').style.minHeight = ori === 'portrait' ? '330mm' : '215mm';
+  $('pFormat').textContent = `F4 / Folio (${ori === 'portrait' ? 'Potret' : 'Lanskap'})`;
+ }
+}
+
+function openPrint(){
+ updatePrint();
+ $('pDate').textContent = fmtDate(today());
+ $('pSign').textContent = fmtDate(today());
+
+ const pBody = $('pBody');
+ if(visitors.length === 0){
+  pBody.innerHTML = `<tr><td colspan="6" class="pth text-center text-slate-400">Tidak ada data rekapitulasi kunjungan.</td></tr>`;
+ } else {
+  pBody.innerHTML = visitors.map((v, i) => `
+   <tr>
+    <td class="pth text-center">${i+1}</td>
+    <td class="pth text-center">${fmtDate(v.date)}</td>
+    <td class="pth font-bold">${esc(v.student)}</td>
+    <td class="pth text-center">Kelas ${esc(v.className)}</td>
+    <td class="pth text-center font-bold ${v.status==='Hadir'?'text-emerald-700':'text-rose-700'}">${esc(v.status)}</td>
+    <td class="pth text-slate-600">${v.status==='Hadir'?'Kunjungan Membaca & Pinjam':'Daftar Presensi Perpustakaan'}</td>
+   </tr>
+  `).join('');
+ }
+
+ const presentCount = visitors.filter(v => v.status === 'Hadir').length;
+ $('pNote').textContent = `Total Kunjungan Tercatat: ${visitors.length} siswa/wi (${presentCount} Hadir, ${visitors.length - presentCount} Tidak Hadir). Total aset buku & perlengkapan perpustakaan terdaftar sebanyak ${items.length} jenis item. Data ini diverifikasi secara sistematis oleh Divisi Perpustakaan SD Al Basyir.`;
+
+ $('printModal').classList.remove('hidden');
+ $('printModal').classList.add('flex');
+}
+
+function closePrint(){
+ $('printModal').classList.add('hidden');
+ $('printModal').classList.remove('flex');
+}
+
+/* Export Laporan to Word (.doc) */
+function downloadDoc(){
+ const presentCount = visitors.filter(v => v.status === 'Hadir').length;
+ const rows = visitors.map((v, i) => `
+  <tr>
+   <td style="border:1px solid #333;padding:5px;text-align:center;">${i+1}</td>
+   <td style="border:1px solid #333;padding:5px;text-align:center;">${fmtDate(v.date)}</td>
+   <td style="border:1px solid #333;padding:5px;font-weight:bold;">${esc(v.student)}</td>
+   <td style="border:1px solid #333;padding:5px;text-align:center;">Kelas ${esc(v.className)}</td>
+   <td style="border:1px solid #333;padding:5px;text-align:center;font-weight:bold;">${esc(v.status)}</td>
+   <td style="border:1px solid #333;padding:5px;">${v.status==='Hadir'?'Kunjungan Membaca & Pinjam':'Presensi Perpustakaan'}</td>
+  </tr>
+ `).join('');
+
+ const htmlContent = `
+  <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+  <head><meta charset='utf-8'><title>LAPORAN DIV. KEMURIDAN SD AL BASYIR</title>
+  <style>
+   body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.4; }
+   h1 { text-align: center; color: #1a2e7b; font-size: 16pt; margin-bottom: 2px; }
+   h2 { text-align: center; font-size: 13pt; margin-top: 0; }
+   .kop { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; text-align: center; }
+   table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+   th { border: 1px solid #333; background-color: #f2f2f2; padding: 6px; font-size: 10pt; }
+  </style>
+  </head>
+  <body>
+   <div class="kop">
+    <h2>ASRAMA PENDIDIKAN WALADAN SOLIHAN</h2>
+    <h1>SD AL BASYIR</h1>
+    <p style="font-size:9pt;margin:0;">Jl. Cikopo Selatan, Sukamahi, Kec. Megamendung, Kabupaten Bogor, Jawa Barat 16770<br>Tahun Ajaran 2026/2027 • Layanan Sistem Informasi Terpadu</p>
+   </div>
+   <h3 style="text-align:center;text-decoration:underline;">LAPORAN DIV. KEMURIDAN</h3>
+   <p style="text-align:center;font-size:10pt;">Rekapitulasi Kunjungan Perpustakaan & Status Kehadiran Siswa</p>
+   <p style="font-size:9pt;"><strong>Tanggal Cetak:</strong> ${fmtDate(today())} | <strong>Penanggung Jawab:</strong> Farasita Nurmahfudzah, S.Hum., Gr.</p>
+   
+   <table>
+    <thead>
+     <tr>
+      <th>No</th><th>Tanggal</th><th>Nama Lengkap Siswa</th><th>Kelas</th><th>Status</th><th>Keterangan</th>
+     </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+   </table>
+
+   <br>
+   <p style="font-size:10pt;background:#f9f9f9;padding:8px;border:1px solid #ccc;">
+    <strong>Catatan Divisi Perpustakaan:</strong> Total Kunjungan Tercatat: ${visitors.length} siswa (${presentCount} Hadir, ${visitors.length - presentCount} Tidak Hadir). Total inventaris terdaftar: ${items.length} item.
+   </p>
+
+   <br><br>
+   <table style="width:100%;border:none;">
+    <tr style="border:none;">
+     <td style="border:none;width:50%;text-align:center;">
+      Mengetahui,<br><strong>Kepala Sekolah SD Al Basyir</strong><br><br><br><br>
+      ( ............................................ )
+     </td>
+     <td style="border:none;width:50%;text-align:center;">
+      Bogor, ${fmtDate(today())}<br><strong>Divisi Perpustakaan</strong><br><br><br><br>
+      <strong>Farasita Nurmahfudzah, S.Hum., Gr.</strong>
+     </td>
+    </tr>
+   </table>
+  </body>
+  </html>
+ `;
+
+ const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement('a');
+ a.href = url;
+ a.download = `Laporan_Perpustakaan_SD_Al_Basyir_${today()}.doc`;
+ document.body.appendChild(a);
+ a.click();
+ document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
